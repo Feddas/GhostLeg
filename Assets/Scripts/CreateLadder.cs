@@ -15,18 +15,38 @@ public class CreateLadder : MonoBehaviour
 			//create vertical line for player
 			Utility.MakeALine(new Vector2(i, 0), new Vector2(i, 10));
 			players.Add(new Player(i));
+			Utility.MakeScreen();
 		}
 		
-		connectToTheRight(0);
-		connectToTheRight(1);
-		connectToTheRight(2);
-		connectToTheRight(3);
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
+	}
 	
+	void OnGUI()
+	{
+		GUI.Box(new Rect(10,10,130,110), "Menu");
+		if(GUI.Button(new Rect(20,40,110,30), "Genarate Lines")) {
+			foreach (var player in players)
+			{
+				player.Reset();
+			}
+			connectToTheRight(0);
+			connectToTheRight(1);
+			connectToTheRight(2);
+			connectToTheRight(3);
+			
+			Utility.RemoveScreen();
+		}
+		if(GUI.Button(new Rect(20,80,110,30), "Clear Lines")) {
+			foreach (var player in players)
+			{
+				player.Reset();
+			}
+			Utility.MakeScreen();
+		}
 	}
 	
 	void connectToTheRight(int playerIndex)
